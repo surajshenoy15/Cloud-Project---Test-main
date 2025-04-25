@@ -22,7 +22,7 @@ const Register = () => {
 
     setLoading(true);
     try {
-      const response = await axios.post('https://cloud-project-test-main-3.onrender.com/api/register/', {
+      const response = await axios.post('http://localhost:8000/api/register/', {
         username: formData.username.trim(),
         email: formData.email.trim(),
         password: formData.password,
