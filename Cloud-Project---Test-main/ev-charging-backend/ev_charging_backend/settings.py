@@ -87,6 +87,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOWED_ORIGINS = [
     "https://cloud-project-test-main-frontend.onrender.com",
+    "http://127.0.0.1:5173",
 ]
 
 # Add these additional CORS settings
