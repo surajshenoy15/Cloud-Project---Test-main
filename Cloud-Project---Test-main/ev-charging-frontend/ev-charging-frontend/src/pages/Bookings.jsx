@@ -29,7 +29,7 @@ const Bookings = () => {
       }
 
       // Changed to GET request
-      const response = await axios.get('https://cloud-project-test-main-frontend.onrender.com/api/bookings/', {
+      const response = await axios.get('https://cloud-project-test-main-3.onrender.com/api/bookings/', {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -156,7 +156,7 @@ const Bookings = () => {
       }
 
       // Updated endpoint to match Django's URL pattern
-      await axios.post(`https://cloud-project-test-main-frontend.onrender.com/api/bookings/${bookingId}/cancel/`, {}, {
+      await axios.post(`https://cloud-project-test-main-3.onrender.com/api/bookings/${bookingId}/cancel/`, {}, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
