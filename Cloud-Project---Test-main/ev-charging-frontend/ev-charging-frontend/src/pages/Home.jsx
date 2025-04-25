@@ -418,24 +418,24 @@ const Homepage = () => {
                 <span className="text-blue-200">EV</span> Charging Hub
               </h1>
               <div className="hidden md:flex space-x-4">
-                <button 
+                {/* <button 
                   onClick={() => navigate('/stations')}
                   className="text-blue-200 hover:text-white transition-colors"
                 >
                   Stations
-                </button>
+                </button> */}
                 <button 
                   onClick={() => navigate('/bookings')}
                   className="text-blue-200 hover:text-white transition-colors"
                 >
                   Bookings
                 </button>
-                <button 
+                {/* <button 
                   onClick={() => navigate('/rewards')}
                   className="text-blue-200 hover:text-white transition-colors"
                 >
                   Rewards
-                </button>
+                </button> */}
               </div>
             </div>
             
@@ -454,16 +454,16 @@ const Homepage = () => {
                 <FaSearch className="absolute right-3 top-1/2 -translate-y-1/2 text-blue-200" />
               </div>
               
-              <button 
+              {/* <button 
                 onClick={() => setShowFilters(!showFilters)}
                 className="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors"
               >
                 <FaFilter className="text-blue-200" />
               </button>
-              
+               */}
               {isLoggedIn ? (
                 <div className="flex items-center gap-4">
-                  <span className="text-sm">100 Points</span>
+                  {/* <span className="text-sm">100 Points</span> */}
                   <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center cursor-pointer"
                        onClick={() => navigate('/profile')}>
                     <FaUser />

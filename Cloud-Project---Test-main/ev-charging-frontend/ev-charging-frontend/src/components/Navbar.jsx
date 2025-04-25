@@ -11,18 +11,8 @@ function Navbar() {
           EV Charging
         </Link>
         <div className="space-x-6">
-          <Link 
-            to="/stations" 
-            className="hover:text-blue-200 transition-colors duration-300 font-medium"
-          >
-            Stations
-          </Link>
-          <Link 
-            to="/profile" 
-            className="hover:text-blue-200 transition-colors duration-300 font-medium"
-          >
-            Profile
-          </Link>
+          
+         
         </div>
       </div>
     </nav>
