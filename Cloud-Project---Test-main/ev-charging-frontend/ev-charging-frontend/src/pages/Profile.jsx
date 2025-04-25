@@ -24,7 +24,7 @@ const Profile = () => {
           return;
         }
 
-        const response = await axios.get('http://localhost:8000/api/profile/', {
+        const response = await axios.get('https://cloud-project-test-main-3.onrender.com/api/profile/', {
           headers: {
             Authorization: `Bearer ${token}`
           }
