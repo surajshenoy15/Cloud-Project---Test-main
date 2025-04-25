@@ -15,7 +15,7 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.post('http://localhost:8000/api/login/', credentials);
+      const response = await axios.post('https://cloud-project-test-main-3.onrender.com/api/login/', credentials);
       localStorage.setItem('token', response.data.token);
       toast.success('Login successful!');
       navigate('/');
