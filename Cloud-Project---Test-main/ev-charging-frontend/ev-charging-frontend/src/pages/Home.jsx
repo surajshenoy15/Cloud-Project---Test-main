@@ -119,7 +119,7 @@ const Homepage = () => {
         return;
       }
   
-      const response = await axios.get('http://localhost:8000/api/stations/', {
+      const response = await axios.get('https://cloud-project-test-main-frontend.onrender.com/api/stations/', {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -189,7 +189,7 @@ const Homepage = () => {
   
       console.log('Sending booking data:', bookingData);
   
-      const response = await axios.post('http://localhost:8000/api/bookings/', bookingData, {
+      const response = await axios.post('https://cloud-project-test-main-frontend.onrender.com/api/bookings/', bookingData, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
