@@ -6,7 +6,7 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import toast from "react-hot-toast";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000/api";
+const API_URL = import.meta.env.VITE_API_URL || "https://cloud-project-test-main-3.onrender.com/api";
 
 const evChargerIcon = new L.Icon({
   iconUrl: "/ev-charger.png",

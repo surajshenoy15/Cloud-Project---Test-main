@@ -56,7 +56,7 @@ const Stations = () => {
           return;
         }
 
-        const response = await axios.get('http://localhost:8000/api/stations/', {
+        const response = await axios.get('https://cloud-project-test-main-3.onrender.com/api/stations/', {
           headers: {
             Authorization: `Bearer ${token}`
           },

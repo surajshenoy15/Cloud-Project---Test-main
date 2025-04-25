@@ -5,7 +5,7 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import evIcon from "/ev-charger.png"; // Ensure this exists in `src/assets/`
 
-const API_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000/api";
+const API_URL = import.meta.env.VITE_API_URL || "https://cloud-project-test-main-3.onrender.com/api";
 
 // Custom EV charger icon
 const evChargerIcon = new L.Icon({
