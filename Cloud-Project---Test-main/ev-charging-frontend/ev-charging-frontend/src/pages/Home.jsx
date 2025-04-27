@@ -707,9 +707,6 @@ const Homepage = () => {
 
 export default Homepage;
 
-const [editingStation, setEditingStation] = useState(null);
-const [showEditModal, setShowEditModal] = useState(false);
-
 // Add this new function
 const handleUpdateStation = async (updatedStationData) => {
   try {
