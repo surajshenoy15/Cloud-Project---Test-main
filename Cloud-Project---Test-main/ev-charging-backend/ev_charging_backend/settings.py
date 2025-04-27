@@ -5,9 +5,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'your-secret-key-here'
 
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ["https://cloud-project-test-main-3.onrender.com"]
+ALLOWED_HOSTS = ["*"]
 
 
 INSTALLED_APPS = [
