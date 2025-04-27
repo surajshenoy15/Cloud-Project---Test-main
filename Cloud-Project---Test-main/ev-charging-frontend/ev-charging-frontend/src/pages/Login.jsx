@@ -54,12 +54,33 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.post('https://cloud-project-test-main-3.onrender.com/api/login/', credentials);
-      localStorage.setItem('token', response.data.token);
-      toast.success('Login successful!');
-      navigate('/');
+      // Using the correct API endpoint
+      const response = await axios.post('https://cloud-project-test-main-3.onrender.com/api/users/login/', credentials);
+      
+      // Store token correctly
+      if (response.data && response.data.token) {
+        localStorage.setItem('token', response.data.token);
+        toast.success('Login successful!');
+        navigate('/');
+      } else {
+        // Handle case where token is not in the expected format
+        console.error('Invalid response format:', response.data);
+        toast.error('Login failed: Invalid server response');
+      }
     } catch (error) {
-      toast.error(error.response?.data?.error || 'Login failed');
+      console.error('Login error:', error);
+      // More detailed error handling
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        toast.error(error.response.data?.detail || error.response.data?.error || 'Invalid credentials');
+      } else if (error.request) {
+        // The request was made but no response was received
+        toast.error('Server not responding. Please try again later.');
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        toast.error('Login failed: ' + error.message);
+      }
     } finally {
       setLoading(false);
     }
