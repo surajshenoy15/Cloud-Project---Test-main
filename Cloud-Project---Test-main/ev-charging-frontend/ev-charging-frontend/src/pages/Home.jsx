@@ -189,7 +189,9 @@ const Homepage = () => {
   
       console.log('Sending booking data:', bookingData);
   
-      const response = await axios.post('https://cloud-project-test-main-3.onrender.com/api/bookings/', bookingData, {
+      // Ensure we're using the correct API endpoint
+      const API_BASE_URL = 'https://cloud-project-test-main-3.onrender.com';
+      const response = await axios.post(`${API_BASE_URL}/api/bookings/`, bookingData, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
