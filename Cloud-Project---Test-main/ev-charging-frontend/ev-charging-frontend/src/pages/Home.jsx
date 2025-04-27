@@ -17,7 +17,8 @@ import {
   FaMapMarkerAlt, 
   FaUser,
   FaCar, 
-  FaClock 
+  FaClock,
+  FaEdit, 
 } from 'react-icons/fa';
 // Remove these duplicate imports
 // import { toast } from 'react-toastify';
@@ -590,7 +591,19 @@ const Homepage = () => {
                           <span className="ml-1 text-gray-600 text-sm">({station.rating})</span>
                         </div>
                       </div>
+                      {/* Inside the station card buttons div */}
                       <div className="flex gap-2">
+                        <button 
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setEditingStation(station);
+                            setShowEditModal(true);
+                          }}
+                          className="px-3 py-1.5 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 
+                            transition-colors flex items-center gap-1 text-sm font-medium"
+                        >
+                          <FaEdit size={14} /> Edit
+                        </button>
                         <button 
                           onClick={(e) => {
                             e.stopPropagation();
@@ -693,3 +706,112 @@ const Homepage = () => {
 };
 
 export default Homepage;
+
+const [editingStation, setEditingStation] = useState(null);
+const [showEditModal, setShowEditModal] = useState(false);
+
+// Add this new function
+const handleUpdateStation = async (updatedStationData) => {
+  try {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      toast.error('Please login to update station');
+      navigate('/login');
+      return;
+    }
+
+    const API_BASE_URL = 'https://cloud-project-test-main-3.onrender.com';
+    const response = await axios.put(
+      `${API_BASE_URL}/api/stations/${updatedStationData.id}/`,
+      updatedStationData,
+      {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      }
+    );
+
+    if (response.data) {
+      toast.success('Station updated successfully');
+      fetchNearbyStations(); // Refresh the stations list
+      setShowEditModal(false);
+      setEditingStation(null);
+    }
+  } catch (error) {
+    console.error("Error updating station:", error);
+    toast.error(error.response?.data?.detail || 'Failed to update station');
+  }
+};
+
+{/* Add this before the closing div of the return statement */}
+  {showEditModal && editingStation && (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div className="bg-white rounded-xl p-6 w-full max-w-md">
+        <h2 className="text-2xl font-bold mb-4">Edit Station</h2>
+        <form onSubmit={(e) => {
+          e.preventDefault();
+          handleUpdateStation(editingStation);
+        }}>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Name</label>
+              <input
+                type="text"
+                value={editingStation.name}
+                onChange={(e) => setEditingStation({...editingStation, name: e.target.value})}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Price per kWh</label>
+              <input
+                type="number"
+                value={editingStation.price}
+                onChange={(e) => setEditingStation({...editingStation, price: parseFloat(e.target.value)})}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Available Ports</label>
+              <input
+                type="number"
+                value={editingStation.capacity}
+                onChange={(e) => setEditingStation({...editingStation, capacity: e.target.value})}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Status</label>
+              <select
+                value={editingStation.availability ? "true" : "false"}
+                onChange={(e) => setEditingStation({...editingStation, availability: e.target.value === "true"})}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              >
+                <option value="true">Available</option>
+                <option value="false">Occupied</option>
+              </select>
+            </div>
+          </div>
+          <div className="mt-6 flex justify-end gap-3">
+            <button
+              type="button"
+              onClick={() => {
+                setShowEditModal(false);
+                setEditingStation(null);
+              }}
+              className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+            >
+              Save Changes
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  )}
